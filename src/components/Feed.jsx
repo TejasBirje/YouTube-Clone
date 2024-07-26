@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import {SideBar, Videos} from "./index"
+import { fetchFromAPI } from "../utils/fetchFromApi";
 
 function Feed() {
+
+  const [selectedCategory, setSelectedCategory] = useState("New")
+  const [videos, setVideos] = useState(null)
+  // since we want the fetchAPi function to be called as soon as the page is loaded because we want to immediately fetch the data, So we use useEffect hook, it is life cycle hook which is called when component is called
+  
+    useEffect(() => {
+      // async func
+      fetchFromAPI(`search?part=snippet&q=${selectedCategory}`).then((data) => setVideos(data.items))
+    }, [])
+  
+
   return (
     <Stack
       sx={{
@@ -22,7 +34,10 @@ function Feed() {
           px: { sx: 0, md: 2 },
         }}
       >
-        <SideBar />
+        <SideBar 
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
 
         {/* used instead of <p> and headings, part of MUI */}
         <Typography
@@ -41,12 +56,12 @@ function Feed() {
           color: "white"
         }}>
            
-           New <span style={{
+           {selectedCategory} <span style={{
             color: "#fc1503"
           }}>Videos</span>
         </Typography>
 
-          <Videos/>
+          <Videos videos={videos}/>
 
       </Box>
 

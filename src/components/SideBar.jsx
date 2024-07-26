@@ -2,9 +2,8 @@ import React from "react";
 import { Stack } from "@mui/material";
 import { categories } from "../utils/constants";
 
-const selectedCategory = 'New'  // currently selected category
 
-const SideBar = () => {
+const SideBar = ({ selectedCategory, setSelectedCategory}) => {  // selectedCategory, setSelectedCategory coming from Feed.jsx as props 
   return (
     <Stack
     direction="row"
@@ -17,6 +16,7 @@ const SideBar = () => {
       {categories.map((category) => (
         <button
          className="category-btn"
+         onClick={() => setSelectedCategory(category.name)}  // updating the selectedCategory state
          style={{
             background: category.name === selectedCategory && '#fc1503', color: "white"  // conditionally changing the color 
          }}
