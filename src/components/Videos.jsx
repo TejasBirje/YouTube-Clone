@@ -2,7 +2,10 @@ import React from "react";
 import { Stack, Box } from "@mui/material";
 import { VideoCard, ChannelCard } from "./index";
 
-const Videos = ({ videos }) => {
+const Videos = ({ videos, direction }) => {
+
+if(!videos?.length) return "Loading..."
+
   // taking the videos from Feed.jsx as props
 
   console.log(videos); // to check if we're getting videos
@@ -11,7 +14,7 @@ const Videos = ({ videos }) => {
     // we first need to decide if we are going to render the Channel profile in the result(first thing in the result)
     // if it data contains the videoId render it with videoCard
     <Stack
-      direction="row"
+      direction={direction || "row" }
       flexWrap="wrap"
       justifyContent="start"
       alignItems="start"
