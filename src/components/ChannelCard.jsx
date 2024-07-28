@@ -4,7 +4,7 @@ import { CheckCircle } from "@mui/icons-material";
 import { demoProfilePicture } from "../utils/constants";
 import { Link } from "react-router-dom";
 
-const ChannelCard = ({ channelDetail }) => {
+const ChannelCard = ({ channelDetail, marginTop }) => {  // To make this component reusable we passed the marginTop in props as it was overlapping in the Videos component.
   return (
     <Box
       sx={{
@@ -18,7 +18,8 @@ const ChannelCard = ({ channelDetail }) => {
             md: "320px"
         },
         height: "326px",
-        margin: "auto"
+        margin: "auto",
+        marginTop  // set marginTop as passed in the props. Wrote instead of marginTop: marginTop
       }}
     >
       <Link to={`/channel/${channelDetail?.id?.channelId}`}>
